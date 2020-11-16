@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
  
-Route::get('/Beranda', function () {
- 	return view('beranda');
-});
+Route::get('beranda', [HomeController::class, 'showberanda' ]);
+Route::get('kategori', [HomeController::class, 'showkategori' ]);
+Route::get('login', [HomeController::class, 'showlogin' ]);
+
+Route::get('produk', [ProdukController::class, 'index']);
+Route::get('produk/create', [ProdukController::class, 'create']);
+Route::post('produk', [ProdukController::class, 'store']);
+Route::get('produk/{produk}', [ProdukController::class, 'show']);
+Route::get('produk/{produk}/edit', [ProdukController::class, 'edit']);
+Route::put('produk/{produk}', [ProdukController::class, 'update']);
+Route::delete('produk/{produk}', [ProdukController::class, 'destroy']);
 
