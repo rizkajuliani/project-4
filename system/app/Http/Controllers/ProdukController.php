@@ -20,7 +20,7 @@ class ProdukController extends Controller {
 	    $produk->stok = request ('stok'); 
 	    $produk->save();
 		
-		return redirect('produk');
+		return redirect('admin/produk');
 	}
 		
 	function show(produk $produk){
@@ -39,12 +39,30 @@ class ProdukController extends Controller {
 	    $produk->stok = request('stok'); 
 	    $produk->save();
 		
-		return redirect('produk');
+		return redirect('admin/produk');
 	}
 	function destroy(produk $produk){
 		$produk->delete();
 
-		return redirect('produk');
+		return redirect('admin/produk');
+	}
+	function filter(produk $produk){
+		$nama = request('nama');
+		$stok = explode(",", request('stok'));
+
+		 
+		
+		//$data['list_produk'] = produk::where('nama','like',  "%$nama%")->get();
+        //$data['list_produk'] = produk::whereIn('stok',  $stok)->get();
+		//$data['list_produk'] = produk::whereBetween('harga',  $harga_min, $harga_max)->get();
+		//$data['list_produk'] = produk::whereNot('nama','like',  "%$nama%")->get();
+        //$data['list_produk'] = produk::whereIn('stok',  $stok)->get();
+		//$data['list_produk'] = produk::whereBetween('harga',  $harga_min, $harga_max)->get();
+		$data['nama'] = $nama;
+		$data['stok'] = request('stok');
+
+
+		return view('produk.index', $data);
 	}
 
 }
